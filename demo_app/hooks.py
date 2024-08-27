@@ -1,8 +1,8 @@
 app_name = "demo_app"
 app_title = "Demo App"
-app_publisher = "anju"
+app_publisher = "abc"
 app_description = "this is a demo app"
-app_email = "anjupatel@gmail.com"
+app_email = "anjupatelo@gmail.com"
 app_license = "mit"
 
 # Apps
