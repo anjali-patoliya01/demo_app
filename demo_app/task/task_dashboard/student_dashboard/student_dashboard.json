@@ -1,0 +1,33 @@
+{
+ "cards": [
+  {
+   "card": "Card One"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Student Chart",
+   "width": "Full"
+  },
+  {
+   "chart": "Student Chart",
+   "width": "Half"
+  },
+  {
+   "chart": "Dashboard Chart Two",
+   "width": "Half"
+  }
+ ],
+ "creation": "2024-09-27 16:24:15.700920",
+ "dashboard_name": "Student Dashboard",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2024-10-08 12:26:11.958775",
+ "modified_by": "Administrator",
+ "module": "Task",
+ "name": "Student Dashboard",
+ "owner": "Administrator"
+}

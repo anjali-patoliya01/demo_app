@@ -1,0 +1,1 @@
+frappe.msgprint('Hello from Custom web js...')

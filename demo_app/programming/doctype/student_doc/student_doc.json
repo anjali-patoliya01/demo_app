@@ -1,0 +1,85 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:student_name",
+ "creation": "2024-09-13 12:20:23.487974",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "student_name",
+  "std",
+  "dob",
+  "email",
+  "parent_doc_link",
+  "status",
+  "icon"
+ ],
+ "fields": [
+  {
+   "fieldname": "student_name",
+   "fieldtype": "Data",
+   "label": "Student Name",
+   "options": "Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "std",
+   "fieldtype": "Int",
+   "label": "Std"
+  },
+  {
+   "fieldname": "dob",
+   "fieldtype": "Date",
+   "label": "DOB"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "parent_doc_link",
+   "fieldtype": "Link",
+   "label": "Parent Doc Link",
+   "options": "Parent Doc"
+  },
+  {
+   "default": "0",
+   "fieldname": "status",
+   "fieldtype": "Check",
+   "label": "status"
+  },
+  {
+   "fieldname": "icon",
+   "fieldtype": "Icon",
+   "label": "Icon"
+  }
+ ],
+ "icon": "icon",
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-09-14 11:37:10.248781",
+ "modified_by": "Administrator",
+ "module": "Programming",
+ "name": "Student Doc",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

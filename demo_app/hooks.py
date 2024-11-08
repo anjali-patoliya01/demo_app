@@ -25,27 +25,29 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/demo_app/css/demo_app.css"
-# app_include_js = "/assets/demo_app/js/demo_app.js"
+# app_include_css = "/assets/demo_app/css/custom_desk.css"
+# app_include_js = "/assets/demo_app/js/custom_desk.js"
+
 
 # include js, css files in header of web template
-# web_include_css = "/assets/demo_app/css/demo_app.css"
-# web_include_js = "/assets/demo_app/js/demo_app.js"
+# web_include_css = "/assets/demo_app/css/custom_web.css"
+# web_include_js = "/assets/demo_app/js/custom_web.js"
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "demo_app/public/scss/website"
 
 # include js, css files in header of web form
-# webform_include_js = {"doctype": "public/js/doctype.js"}
-# webform_include_css = {"doctype": "public/css/doctype.css"}
+# webform_include_js = {"Student": "public/js/custom_web_form.js"}
+# webform_include_css = {"Student": "public/css/custom_web_form.css"}
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
 
+
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
-# doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
+doctype_js = {"Customer" : "public/js/custom_action_button.js"}
+doctype_list_js = {"Student" : "public/js/doctype_list.js"}
+doctype_tree_js = {"Tree Doc" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
 # Svg Icons
@@ -61,14 +63,19 @@ app_license = "mit"
 
 # website user home page (by Role)
 # role_home_page = {
-# 	"Role": "home_page"
+# 	# "Role": "home_page"
+#     "Customer": "orders",
+#     "Supplier": "bills"
 # }
 
 # Generators
 # ----------
 
 # automatically create page for each record of this doctype
-# website_generators = ["Web Page"]
+# website_generators = ["Job Opening"]
+
+
+
 
 # Jinja
 # ----------
@@ -121,62 +128,100 @@ app_license = "mit"
 # 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
 #
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+has_permission = {
+	# "Event": "frappe.desk.doctype.event.event.has_permission",
+    "Event": "demo_app.permissions.event_has_permission",
+}
+
+
+
 
 # DocType Class
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {
+	# "ToDo": "custom_app.overrides.CustomToDo",
+    # 'Student' : 'demo_app.events.StudentStatus',
+    # "Employee" : 'demo_app.overrides.override_class.CustomEmployee',
+    # "Customer" : 'demo_app.overrides.override_class.CustomCustomer',
+    # "SalesOrder" : 'demo_app.overrides.override_class.CustomSalesOrder',
+    'Customer': 'demo_app.overrides.override_whitelist.CustomCustomerWhitelist',
+    'Purchase Order':'demo_app.overrides.task_override_class.CustomPurchaseOrder'
+}
+
+
+
 
 # Document Events
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Customer": {
+		# "on_update": "method",
+        # "on_update": "demo_app.task.doctype.client_side_scripting.client_side_scripting",
+		# "on_cancel": "method",
+		# "on_trash": "methodt",
+        # "after_insert": "demo_app.custom_methods.update_customer_group_count_on_insert",
+        "after_insert": "demo_app.overrides.override_events.update_customer_group_count_on_insert",
+	},
+    "Student" :{
+        'validate' : 'demo_app.events.update_status_based_on_percentage',
+	},
+    # "Sales Order": {
+    #     "before_save": "demo_app.overrides.discount_percentage.before_save"
+    # }
+}
+
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"demo_app.tasks.all"
-# 	],
-# 	"daily": [
-# 		"demo_app.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"demo_app.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"demo_app.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"demo_app.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+    # "cron": {
+    #     "* * * * *":[
+    #         # 'demo_app.tasks.cron'     #every miniute add new note
+    #         'demo_app.tasks.before_save'
+    #     ]
+    # },
+
+	"all": [
+		"demo_app.tasks.all"
+	],
+	"daily": [
+		"demo_app.tasks.daily"
+	],
+	"hourly": [
+		"demo_app.tasks.hourly"
+	],
+	"weekly": [
+		"demo_app.tasks.weekly"
+	],
+	"monthly": [
+		"demo_app.tasks.monthly"
+	],
+}
 
 # Testing
 # -------
 
 # before_tests = "demo_app.install.before_tests"
 
+
+
+
 # Overriding Methods
 # ------------------------------
-#
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "demo_app.event.get_events"
-# }
+
+override_whitelisted_methods = {
+	# "frappe.desk.doctype.event.event.get_events": "demo_app.event.get_events"
+   		'erpnext.controllers.item_variant.create_variant':'demo_app.overrides.override_whitelist.custom_create_variant',
+        'erpnext.accounts.doctype.sales_invoice.sales_invoice.make_delivery_note ':'demo_app.overrides.task_override_whitelist_method',
+        "erpnext.selling.doctype.sales_order.sales_order.get_requested_item_qty": "demo_app.overrides.custom_get_requested_item_qty" 
+}		
+
+
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
@@ -207,26 +252,48 @@ app_license = "mit"
 # User Data Protection
 # --------------------
 
-# user_data_fields = [
-# 	{
-# 		"doctype": "{doctype_1}",
-# 		"filter_by": "{filter_by}",
-# 		"redact_fields": ["{field_1}", "{field_2}"],
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_2}",
-# 		"filter_by": "{filter_by}",
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_3}",
-# 		"strict": False,
-# 	},
-# 	{
-# 		"doctype": "{doctype_4}"
-# 	}
-# ]
+user_data_fields = [
+	# {
+	# 	"doctype": "{doctype_1}",
+	# 	"filter_by": "{filter_by}",
+	# 	"redact_fields": ["{field_1}", "{field_2}"],
+	# 	"partial": 1,
+	# },
+	# {
+	# 	"doctype": "{doctype_2}",
+	# 	"filter_by": "{filter_by}",
+	# 	"partial": 1,
+	# },
+	# {
+	# 	"doctype": "{doctype_3}",
+	# 	"strict": False,
+	# },
+	# {
+	# 	"doctype": "{doctype_4}"
+	# }
+    
+	{
+        "doctype": "Student",
+        "filter_by": "student_id",  
+        "redact_fields": ["email", "phone_number"],  
+        "partial": 1,  
+    },
+    {
+        "doctype": "Sales Invoice",
+        "filter_by": "owner",  
+        "partial": 0,  
+    },
+    {
+        "doctype": "Employee",
+        "strict": False,  
+    },
+    {
+        "doctype": "Project"
+    }
+]
+
+
+
 
 # Authentication and authorization
 # --------------------------------
