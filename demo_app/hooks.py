@@ -158,22 +158,10 @@ override_doctype_class = {
 # Hook on document methods and events
 
 doc_events = {
-	"Customer": {
-		# "on_update": "method",
-        # "on_update": "demo_app.task.doctype.client_side_scripting.client_side_scripting",
-		# "on_cancel": "method",
-		# "on_trash": "methodt",
-        # "after_insert": "demo_app.custom_methods.update_customer_group_count_on_insert",
-        "after_insert": "demo_app.overrides.override_events.update_customer_group_count_on_insert",
-	},
-    "Student" :{
-        'validate' : 'demo_app.events.update_status_based_on_percentage',
-	},
-    # "Sales Order": {
-    #     "before_save": "demo_app.overrides.discount_percentage.before_save"
-    # }
+    'Sales Invoice': {
+        'validate': 'demo_app.task1.calculate_outstanding_amount',
+    }
 }
-
 
 # Scheduled Tasks
 # ---------------
